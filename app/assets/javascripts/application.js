@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-route
+//= require "feed-reader/FeedReader"
+//= require "feed-reader/controllers/FeedReaderController.js"
