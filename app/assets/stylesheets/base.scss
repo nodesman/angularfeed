@@ -1,0 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "proxima-nova-alt";
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+:root {
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+}
