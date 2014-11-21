@@ -1,53 +1,45 @@
-
-<div class="panel">
-  <div class="pane feed-subscriptions">
-    <div class="list">
-      <a href="#" class="welcome">Hi! Raj!</a>
-      <div class="all">Unread</div>
-      <ul>
-        <li class="folder expanded">Blogs <span class="count">31</span></li>
-        <li class="second-level feed-item">This is a test</li>
-        <li class="folder"><span class="name">Important Companies</span> <span class="count">44</span></li>
-        <li class="feed-item"><span class="name">Important Frameworks</span><span class="count">44</span></li>
-      </ul>
-     </div>
-    <div class="icons">
-      <a href="#" class="refresh action-icon"></a>
-      <a class="right add-subscription-icon action-icon" href="#"></a>
+<div class="app" ng-app="FeedReader">
+  <div class="panel">
+    <div class="pane feed-subscriptions">
+      <div class="list">
+        <a href="#" class="welcome">Hi! Raj!</a>
+        <div class="all">Unread</div>
+        <ul>
+          <li class="folder expanded">Blogs <span class="count">31</span></li>
+          <li class="second-level feed-item">This is a test</li>
+          <li class="folder"><span class="name">Important Companies</span> <span class="count">44</span></li>
+          <li class="feed-item"><span class="name">Important Frameworks</span><span class="count">44</span></li>
+        </ul>
+      </div>
+      <div class="icons">
+        <a href="#" class="refresh action-icon"></a>
+        <a class="right add-subscription-icon action-icon" href="#"></a>
+      </div>
     </div>
-  </div>
 
-  <div class="pane feed">
-    <div class="list">
-      <div class="item">
-        <div class="time">
-          5:00 PM
-        </div>
+    <div class="pane feed">
+      <div class="list">
+        <div class="item">
+          <div class="time">
+            5:00 PM
+          </div>
 
-        <div class="feed">Stack Overflow Careers</div>
-        <h2>Software Engineer, O'Reilly Media at O'Reilly Media</h2>
-        <div class="excerpt">
-          Inspired by Chewang Norphel’s work of creating artificial glaciers, when Sonam Wangchuk saw people struggling to meet their basic water requirements in Ladakh
+          <div class="feed">Stack Overflow Careers</div>
+          <h2>Software Engineer, O'Reilly Media at O'Reilly Media</h2>
+          <div class="excerpt">
+            Inspired by Chewang Norphel’s work of creating artificial glaciers, when Sonam Wangchuk saw people struggling to meet their basic water requirements in Ladakh
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="add-new-dialog">
-    <div class="field">
-      <label>Feed URL:</label>
-      <input type="text" name="feed_url">
+    <div class="add-new-dialog hide">
+      <div class="field">
+        <label>Feed URL:</label>
+        <input type="text" name="feed_url">
+      </div>
+
     </div>
 
   </div>
 
 </div>
-
-<script>
-  var $addDialogElement = $(".add-new-dialog");
-  $addDialogElement.dialog({
-      autoOpen: false
-  });
-  $(".add-subscription-icon").click(function() {
-      $addDialogElement.dialog("open");
-  });
-</script>
