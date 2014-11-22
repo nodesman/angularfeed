@@ -143,26 +143,55 @@
   }
 }
 
+.whoami {
+  padding: 1rem;
+  display: block;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .subscribed-item {
   display: block;
   font-size: 1.8rem;
   &:hover {
     background-color: #eee;
   }
+
+
   .item-content {
     padding: 1rem;
-    padding-left: 3rem;
+    padding-left: 2rem;
     cursor: pointer;
   }
 
   .folder {
-    background: url(image_path("feed-item.png")) no-repeat 0.5rem 50%;
-    background-size: 1.3rem;
+    .folder-icon {
+      background: url(image_path("feed-item-open.png")) no-repeat;
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      margin-right: 1rem;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    &.collapsed {
+      .folder-icon {
+        background-image: url(image_path("feed-item.png"));
+      }
+    }
   }
 
   .feed-item {
+
+
     &.indented {
       padding-left: 5rem;
+      &.collapsed {
+        display: none;
+      }
     }
      img {
        width: 2rem;
