@@ -55,7 +55,11 @@
     });
 
     $scope.addSubscription = function () {
-      //do some stuff
+      var $folderName = $scope.currentFolderSelectionValue;
+      if ($scope.isNewFolder) {
+        $folderName = $scope.newFolderName;
+      }
+      $subscriptionService.subscribe($scope.url, $folderName);
       $scope.close();
     };
 
