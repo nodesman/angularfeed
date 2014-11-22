@@ -34,7 +34,7 @@
 
     <div class="title-bar">
       <input type="button" class="left" ng-click="close()" value="Cancel" />
-      <input type="button" class="right" ng-click="addSubscription();" value="Subscribe" ng-disabled="subscribeDisabled" />
+      <input type="button" class="right" ng-click="addSubscription();" value="Subscribe" ng-disabled="!isValidFormState" />
       <div class="heading">Add Subscription</div>
     </div>
 
@@ -43,7 +43,7 @@
     </div>
 
     <div class="footer">
-      <input type="text" ng-show="isNewFolder" name="folder-name" class="right folder-name" placeholder="Folder name..." ng-model="newFolderName">
+      <input type="text" ng-show="isNewFolder" name="folder-name" class="right folder-name" placeholder="Folder name..." ng-model="newFolderName" focus-on="folderNameFocus">
       <select name="category" class="category" ng-model="currentFolderSelectionValue">
         <option value="no-folder" selected="selected">No Folder</option>
         <optgroup label="Select Folder:" >

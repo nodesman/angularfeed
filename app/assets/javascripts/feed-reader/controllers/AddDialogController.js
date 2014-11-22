@@ -2,7 +2,7 @@
   "use strict";
 
   var feedReader = angular.module("FeedReader");
-  feedReader.controller("AddDialogController", ["$scope", "$element", "$dialogService", function ($scope, $element, $dialogService) {
+  feedReader.controller("AddDialogController", ["$scope", "$element", "$subscriptionService", "$dialogService", function ($scope, $element, $subscriptionService, $dialogService) {
 
     var FOLDER_SELECTION_NONLITERALS = {
       NEW_FOLDER: "new-folder",
@@ -27,6 +27,7 @@
       } else {
         $scope.subscribeDisabled = false;
       }
+      $scope.folderList = $subscriptionService.getFolderList();
     }
 
     $scope.$on("showAddNewDialog", function () {
@@ -76,8 +77,8 @@
       setInitialState();
       $dialogService.show($element);
     };
-
-    $dialogService.init($element);
     setInitialState();
+    $dialogService.init($element);
+
   }]);
 })();

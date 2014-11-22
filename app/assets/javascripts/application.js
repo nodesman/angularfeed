@@ -17,6 +17,7 @@
 //= require angular-route
 //= require "feed-reader/FeedReader"
 //= require "feed-reader/services/DialogService.js"
+//= require "feed-reader/services/SubscriptionsService.js"
 //= require "feed-reader/directives/FocusOnDirective.js"
 //= require "feed-reader/controllers/FeedReaderController.js"
 //= require "feed-reader/controllers/SubscriptionListController.js"
