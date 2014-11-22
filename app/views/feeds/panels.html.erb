@@ -1,5 +1,5 @@
 <div class="panel">
-  <div class="pane feed-subscriptions">
+  <div class="pane feed-subscriptions" ng-controller="SubscriptionListController">
     <div class="list">
       <a href="#" class="welcome">Hi! Raj!</a>
       <div class="all">Unread</div>
@@ -12,11 +12,10 @@
     </div>
     <div class="icons">
       <a href="#" class="refresh action-icon"></a>
-      <a class="right add-subscription-icon action-icon" href="#"></a>
+      <a class="right add-subscription-icon action-icon" ng-click="showDialog()"></a>
     </div>
   </div>
-
-  <div class="pane feed">
+  <div class="pane feed" ng-controller="FeedItemsController">
     <div class="list">
       <div class="item">
         <div class="time">
@@ -31,12 +30,29 @@
       </div>
     </div>
   </div>
-  <div class="add-new-dialog hide">
-    <div class="field">
-      <label>Feed URL:</label>
-      <input type="text" name="feed_url">
+  <div class="hide add-new-dialog" ng-controller="AddDialogController">
+
+    <div class="title-bar">
+      <input type="button" class="left" ng-click="close()" value="Cancel" />
+      <input type="button" class="right" ng-click="addSubscription();" value="Subscribe" ng-disabled="subscribeDisabled" />
+      <div class="heading">Add Subscription</div>
     </div>
 
-  </div>
+    <div class="field">
+      <input type="text" class="feed-url" name="feed_url" ng-model="url" placeholder="Feed URL">
+    </div>
 
+    <div class="footer">
+      <input type="text" ng-show="isNewFolder" name="folder-name" class="right folder-name" placeholder="Folder name..." ng-model="newFolderName">
+      <select name="category" class="category" ng-model="currentFolderSelectionValue">
+        <option value="no-folder" selected="selected">No Folder</option>
+        <optgroup label="Select Folder:" >
+          <option ng-repeat="folder in folderList" value="{{folder}}">{{folder}}</option>
+        </optgroup>
+        <optgroup label="Create:">
+          <option value="new-folder">Create New</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
 </div>

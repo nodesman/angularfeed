@@ -19,6 +19,13 @@ table {
   font-size: 10px;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 a {
   text-decoration: none;
 }

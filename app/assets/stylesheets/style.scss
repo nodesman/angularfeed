@@ -8,8 +8,9 @@
 
 /*! Framework */
 @import "framework-elements";
+@import "components/dialog";
 
-.app {
+.app,.content {
   height: 100%;
 }
 
@@ -28,7 +29,6 @@
     width: 75%;
   }
 }
-
 
 .feed {
   .list {
