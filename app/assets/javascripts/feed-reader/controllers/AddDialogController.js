@@ -17,16 +17,8 @@
       $scope.isNewFolder = false;
       $scope.folderNameFocus = false;
       $scope.isValidFoldername = false;
-      $scope.subscribeDisabled = false;
-      $scope.folderList = ["Blogs", "Important Companies", "Important Frameworks"];
-    }
-
-    function assignSubscribeButtonEnabledState(newValue) {
-      if (true === $scope.isNewFolder) {
-        $scope.subscribeDisabled = (0 === newValue.length);
-      } else {
-        $scope.subscribeDisabled = false;
-      }
+      $scope.isValidUrl = false;
+      $scope.isValidFormState = false;
       $scope.folderList = $subscriptionService.getFolderList();
     }
 
@@ -34,24 +26,26 @@
       $scope.open();
     });
 
-
-
     $scope.$watch(function () {
       return $scope.newFolderName
     }, function (newValue) {
       $scope.isValidFolderName = (0 < newValue.length);
     });
 
-    $scope.$watch(function () {
-      return $scope.newFolderName;
-    }, function (newValue) {
-      assignSubscribeButtonEnabledState(newValue);
+    $scope.$watch(function() {
+      return $scope.url;
+    }, function(newValue) {
+      $scope.isValidUrl = (false !== !!newValue && newValue.length > 0)
     });
 
-    $scope.$watch(function () {
-      return $scope.isNewFolder;
+    $scope.$watch(function() {
+      var $validFolderName = true;
+      if ($scope.isNewFolder === true) {
+        $validFolderName = ($scope.newFolderName.length !== 0);
+      }
+      return $scope.isValidUrl && $validFolderName;
     }, function (newValue) {
-      assignSubscribeButtonEnabledState($scope.newFolderName)
+      $scope.isValidFormState = newValue;
     });
 
     $scope.$watch(function () {
