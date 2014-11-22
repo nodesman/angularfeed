@@ -2,7 +2,7 @@
   "use strict";
 
   var feedReader = angular.module("FeedReader");
-  feedReader.controller("AddDialogController", ["$scope", "$element", "$subscriptionService", "$dialogService", function ($scope, $element, $subscriptionService, $dialogService) {
+  feedReader.controller("AddDialogController", ["$scope", "$rootScope", "$element", "$subscriptionService", "$dialogService", function ($scope, $rootScope, $element, $subscriptionService, $dialogService) {
 
     var FOLDER_SELECTION_NONLITERALS = {
       NEW_FOLDER: "new-folder",

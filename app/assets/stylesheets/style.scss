@@ -143,6 +143,40 @@
   }
 }
 
+.subscribed-item {
+  display: block;
+  font-size: 1.8rem;
+  &:hover {
+    background-color: #eee;
+  }
+  .item-content {
+    padding: 1rem;
+    padding-left: 3rem;
+    cursor: pointer;
+  }
+
+  .folder {
+    background: url(image_path("feed-item.png")) no-repeat 0.5rem 50%;
+    background-size: 1.3rem;
+  }
+
+  .feed-item {
+    &.indented {
+      padding-left: 5rem;
+    }
+     img {
+       width: 2rem;
+       height: 2rem;
+       float: left;
+       margin-right: 1rem;
+     }
+  }
+
+  .folder {
+
+  }
+}
+
 .action-icon {
   background-repeat: no-repeat;
   background-size: contain;

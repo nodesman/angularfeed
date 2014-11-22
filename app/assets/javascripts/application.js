@@ -18,7 +18,7 @@
 //= require "feed-reader/FeedReader"
 //= require "feed-reader/services/DialogService.js"
 //= require "feed-reader/services/SubscriptionsService.js"
-//= require "feed-reader/directives/FocusOnDirective.js"
+//= require "feed-reader/directives/SubscriptionItemDirective.js"
 //= require "feed-reader/controllers/FeedReaderController.js"
 //= require "feed-reader/controllers/SubscriptionListController.js"
 //= require "feed-reader/controllers/AddDialogController.js"
