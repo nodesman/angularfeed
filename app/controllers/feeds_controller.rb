@@ -16,5 +16,9 @@ class FeedsController < ApplicationController
     render "panels"
   end
 
+  def item
+    render :layout=> "empty", :partial => "viewitem"
+  end
+
 
 end

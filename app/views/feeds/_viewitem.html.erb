@@ -1,0 +1,12 @@
+
+<div class="item page">
+  <div class="back" ng-click="back()">Back</div>
+  <div class="heading" ng-click="visitPost()">
+      <h2>{{post.title}}</h2>
+      <p>{{post.site}}</p>
+      <p>{{post.author}}</p>
+  </div>
+
+  <div class="content" ng-bind-html="post.body">
+  </div>
+</div>

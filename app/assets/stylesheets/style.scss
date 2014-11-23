@@ -226,17 +226,17 @@
   margin-bottom: 2rem;
   border: 0.1rem solid #eee;
   .section-date {
-    background: linear-gradient(rgba(255, 255, 255, 1.0), rgba(230, 230, 230, 1.0) 21px);
+    background: linear-gradient(rgba(255, 255, 255, 1.0) 10px, rgba(230, 230, 230, 1.0) 21px);
     border-bottom: 0.1rem solid #eee;
     padding: 0.3rem;
     cursor: default;
   }
 }
 
-
 .feed-item {
   @include clearfix;
   padding: 0.5rem;
+  cursor: pointer;
 
   .icon {
     float: left;
@@ -272,3 +272,37 @@
 
 }
 
+
+.item.page {
+  width: auto;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  font-size: 1.8rem;
+  padding: 3rem 0 0 0;
+
+  .back {
+    margin: 1rem 0 1rem 1rem;
+    border-radius: 0.2rem;
+    background-color: #666;
+    color: #fff;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: #eee;
+      color: #000;
+    }
+  }
+
+  .heading {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 1rem;
+    h2 {
+      margin: 0;
+    }
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}

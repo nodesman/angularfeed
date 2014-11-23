@@ -11,6 +11,7 @@
         $scope.showItem = function() {
           $scope.$emit("showItem", $scope.item);
         }
+
       },
       template: $("#feed-item-template").html()
     };

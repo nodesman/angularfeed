@@ -15,8 +15,10 @@
 //= require jqueryui
 //= require moment
 //= require livestamp.min
+//= require lodash.min
 //= require angular
 //= require angular-route
+//= require angular-sanitize.min
 //= require "feed-reader/FeedReader"
 //= require "feed-reader/services/DialogService.js"
 //= require "feed-reader/services/SubscriptionsService.js"
@@ -24,6 +26,7 @@
 //= require "feed-reader/directives/FeedListItemDirective.js"
 //= require "feed-reader/directives/FeedGroupingDirective.js"
 //= require "feed-reader/controllers/FeedReaderController.js"
+//= require "feed-reader/controllers/FeedItemController.js"
 //= require "feed-reader/controllers/SubscriptionListController.js"
 //= require "feed-reader/controllers/AddDialogController.js"
 //= require "feed-reader/controllers/FeedItemsController.js"
