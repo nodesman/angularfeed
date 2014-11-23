@@ -3,8 +3,8 @@
   <div class="back" ng-click="back()">Back</div>
   <div class="heading" ng-click="visitPost()">
       <h2>{{post.title}}</h2>
-      <p>{{post.site}}</p>
-      <p>{{post.author}}</p>
+      <p ng-show="post.title">{{post.site}}</p>
+      <p ng-show="post.author">{{post.author}}</p>
   </div>
 
   <div class="content" ng-bind-html="post.body">
