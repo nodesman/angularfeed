@@ -5,13 +5,14 @@
       restrict: "EAC",
       replace: true,
       template: $("#subscribed-item").html(),
-      link: function($scope, element, attributes) {
-        $scope.collapse = function () {
+      link: function($scope, $element, $attributes) {
+        $scope.collapse = function ($event) {
           $scope.$emit("collapseFolder", $scope.subscription);
-        }
+        };
+
         $scope.show = function() {
-          $scope.$emit("renderItem", $scope.subscription);
-        }
+          $scope.$emit("renderItem", $scope.subscription)
+        };
       }
     };
   });

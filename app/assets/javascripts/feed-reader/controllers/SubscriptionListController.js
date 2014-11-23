@@ -13,10 +13,17 @@
 
     $scope.subscriptions = $subscriptionsList;
 
+
+    $scope.collage = function() {
+      //show all feed items
+      $scope.$emit("collage");
+    };
+
     $scope.$on("collapseFolder", function($event, $object) {
       var $startingIndex = null, $endIndex = null;
       var $endState = !$object.collapsed;
       for (var $index in $subscriptionsList) {
+
         if (angular.equals($subscriptionsList[$index], $object)) {
           $startingIndex = $index;
         }
