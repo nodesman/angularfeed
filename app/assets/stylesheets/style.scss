@@ -216,9 +216,59 @@
 
 .refresh {
   background-image: url(image_path('feed-refresh.png'));
-
 }
 
 .add-subscription-icon {
   background-image: url(image_path("add.png"));
 }
+
+.feed-grouping {
+  margin-bottom: 2rem;
+  border: 0.1rem solid #eee;
+  .section-date {
+    background: linear-gradient(rgba(255, 255, 255, 1.0), rgba(230, 230, 230, 1.0) 21px);
+    border-bottom: 0.1rem solid #eee;
+    padding: 0.3rem;
+    cursor: default;
+  }
+}
+
+
+.feed-item {
+  @include clearfix;
+  padding: 0.5rem;
+
+  .icon {
+    float: left;
+    margin: 0.5rem 1rem 0 0;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+  }
+  .first-row {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background-color: #999;
+    color: #fff;
+  }
+
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 80%;
+  }
+
+  h2, p {
+    margin: 0;
+  }
+  .item-date {
+    float: right;
+  }
+
+}
+

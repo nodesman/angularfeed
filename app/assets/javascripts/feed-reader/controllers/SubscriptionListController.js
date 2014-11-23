@@ -13,7 +13,6 @@
 
     $scope.subscriptions = $subscriptionsList;
 
-
     $scope.collage = function() {
       //show all feed items
       $scope.$emit("collage");

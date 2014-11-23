@@ -17,21 +17,11 @@
 
   <div class="pane feed" ng-controller="FeedItemsController">
     <div class="list">
-      <div class="item">
-        <div class="time">
-          5:00 PM
-        </div>
-
-        <div class="feed">Stack Overflow Careers</div>
-        <h2>Software Engineer, O'Reilly Media at O'Reilly Media</h2>
-        <div class="excerpt">
-          Inspired by Chewang Norphel’s work of creating artificial glaciers, when Sonam Wangchuk saw people struggling to meet their basic water requirements in Ladakh
-        </div>
-      </div>
+      <feed-grouping ng-repeat="grouping in assortedFeedItems" />
     </div>
   </div>
-  <div class="hide add-new-dialog" ng-controller="AddDialogController">
 
+  <div class="hide add-new-dialog" ng-controller="AddDialogController">
     <div class="title-bar">
       <input type="button" class="left" ng-click="close()" value="Cancel" />
       <input type="button" class="right" ng-click="addSubscription();" value="Subscribe" ng-disabled="!isValidFormState" />
@@ -67,3 +57,27 @@
       </div>
   </div>
 </script>
+
+<script type="text/html" id="feed-grouping-template">
+  <div class="feed-grouping">
+    <div class="section-date" data-livestamp="{{grouping.date}}"></div>
+    <feed-item ng-repeat="item in grouping.items" />
+  </div>
+</script>
+
+<script type="text/html" id="feed-item-template">
+  <div class="feed-item" ng-click="showItem()">
+    <div class="icon"><img ng-src="{{item.favicon}}"/></div>
+    <div class="item-content">
+        <div class="first-row">
+          <div class="item-date" data-livestamp="{{item.time}}"></div>
+          <div class="name">{{item.site}}</div>
+        </div>
+        <div class="second-row">
+          <h2 class="title">{{item.title}}</h2>
+          <p class="excerpt">{{item.body}}</p>
+        </div>
+    </div>
+  </div>
+</script>
+
