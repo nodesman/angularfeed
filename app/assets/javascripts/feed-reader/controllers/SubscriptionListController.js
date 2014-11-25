@@ -7,29 +7,46 @@
       $rootScope.$broadcast("showAddNewDialog");
     };
 
-    var $subscriptionsList = $subscriptionService.getSubscriptionsSerialList();
-    for (var $index in $subscriptionsList) {
-      $subscriptionsList[$index].collapsed = false;
-    }
-    $scope.subscriptions = $subscriptionsList;
+    var $subscriptionsList = [];
+
+    $scope.$on("renderSubscriptions", function() {
+      $subscriptionsList = $subscriptionService.getSubscriptionsSerialList();
+      $subscriptionsList = _.map($subscriptionsList, function(item) {
+        item.collapsed = false;
+        return item;
+      });
+      $scope.subscriptions = $subscriptionsList;
+    });
 
     $scope.collage = function() {
-      //show all feed items
       $scope.$emit("collage");
     };
 
     $scope.$on("collapseFolder", function($event, $object) {
+
+      console.log("Collapse");
+      console.log($object);
       var $startingIndex = null, $endIndex = null;
+
       var $endState = !$object.collapsed;
-      for (var $index in $subscriptionsList) {
+
+      for (var $index =0; $index < $subscriptionsList.length; $index++) {
 
         if (angular.equals($subscriptionsList[$index], $object)) {
           $startingIndex = $index;
         }
 
-        if (null !== $startingIndex && (($subscriptionsList[$index].type === 'feed' && $subscriptionsList[$index].child === false) || $subscriptionsList.type === 'folder')) {
-          $endIndex = $index - 1;
-          break;
+        if (null !== $startingIndex && $index !== $startingIndex) {
+          if  (($subscriptionsList[$index].type === 'feed' && $subscriptionsList[$index].child === false) || $subscriptionsList[$index].type === 'folder') {
+            $endIndex = $index - 1;
+            break;
+          }
+
+          if ($index === $subscriptionsList.length - 1) {
+            $endIndex = $index;
+            break;
+          }
+
         }
       }
 

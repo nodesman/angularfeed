@@ -3,60 +3,58 @@
 
   var feedReader = angular.module("FeedReader");
   feedReader.factory("$subscriptionService", ["$window", function($window) {
-
-    var Subscriptions = [];
-    var subscriptionItemKey = "angular_feed_data";
+    var StoredSubscriptions = [];
+    var ProcessedSubscriptions = [];
 
     function reloadSubscriptions() {
-      Subscriptions = JSON.parse($window.localStorage.getItem(subscriptionItemKey));
+      StoredSubscriptions = JSON.parse($window.localStorage.getItem("angular_feed_data"));
     }
 
     function commitSubscriptions() {
-      $window.localStorage.setItem(subscriptionItemKey, JSON.stringify(Subscriptions));
+      $window.localStorage.setItem("angular_feed_data", JSON.stringify(StoredSubscriptions));
     }
 
     reloadSubscriptions();
 
     var subscriptionService = {
       isFirstTime: function() {
-        return (null === Subscriptions);
+        return (null === StoredSubscriptions);
+      },
+
+      setProcessedSubscriptions: function(processed) {
+        ProcessedSubscriptions = processed;
       },
       getSubscriptionsSerialList: function() {
-        return [
-          {
-            type: "folder",
-            name: "Blogs"
-          },
-          {
-            name: "A List Apart",
-            type: "feed",
-            favicon: "http://alistapart.com/d/_repo/site_assets/img/favicons/favicon.ico",
-            url: "http://feeds.feedburner.com/alistapart/main",
-            child: true
-          },
-          {
-            name: "W3C Blog",
-            type: "feed",
-            favicon: "http://www.w3.org/2008/site/images/favicon.ico",
-            url: "http://www.w3.org/blog/feed/",
-            child: true
-          },
-          {
-            name: "ChrisG",
-            type: "feed",
-            favicon: "http://www.chrisg.com/wp-content/themes/chrisg-genesis/images/favicon.ico",
-            url: "http://feeds.feedburner.com/chrisgcom",
-            child: false
-          }];
+
+        var fullList = [];
+
+        _.map(ProcessedSubscriptions, function(item) {
+          if (item.type === 'feed') {
+            var current = _.clone(item);
+            current.child = false;
+            fullList.push(current)
+          } else {
+            var folder = _.clone(item);
+            delete folder.items;
+            fullList.push(folder);
+            _.map(item.items, function(item) {
+              var current = _.clone(item)
+              current.child = true;
+              fullList.push(current);
+            });
+          }
+        });
+
+        return fullList;
       },
       getSubscriptionsRaw: function () {
-        return $window.localStorage.getItem(subscriptionItemKey);
+        return $window.localStorage.getItem("angular_feed_data");
       },
       doesSubscriptionExist: function(url) {
-        if (Subscriptions.length > 0)
-          for (var iter=0; iter < Subscriptions.length; iter++) {
-            if (undefined !== Subscriptions[iter].type && Subscriptions[iter].type === "folder") {
-              var currentFeedList = Subscriptions[iter].items;
+        if (StoredSubscriptions.length > 0)
+          for (var iter=0; iter < StoredSubscriptions.length; iter++) {
+            if (undefined !== StoredSubscriptions[iter].type && StoredSubscriptions[iter].type === "folder") {
+              var currentFeedList = StoredSubscriptions[iter].items;
               for (var subiter=0; subiter < currentFeedList.length; subiter++) {
                 if (currentFeedList[subiter] === url) {
                   return true;
@@ -65,7 +63,7 @@
               continue;
             }
 
-            if (Subscriptions[iter] === url) {
+            if (StoredSubscriptions[iter] === url) {
               return true;
             }
           }
@@ -79,7 +77,7 @@
         }
 
         if (null !== folderName) { //filing the subscription under a folder.
-          var folder = _.find(Subscriptions, function (item) {
+          var folder = _.find(StoredSubscriptions, function (item) {
             if (item.type === 'folder') {
               return item.name;
             }
@@ -92,13 +90,13 @@
               type: 'folder',
               items: [url]
             };
-            Subscriptions.push(newFolder);
+            StoredSubscriptions.push(newFolder);
           } else {
             folder.items.push(url);
           }
         }
         else {
-          Subscriptions.push(url);
+          StoredSubscriptions.push(url);
         }
 
         commitSubscriptions();
@@ -106,10 +104,10 @@
       },
       getFolderList: function() {
         var folderNames = [];
-        if (Subscriptions.length > 0)
-          for (var iter=0; iter < Subscriptions.length; iter++) {
-            if (Subscriptions[iter].type === 'folder') {
-              folderNames.push(Subscriptions[iter].name);
+        if (StoredSubscriptions.length > 0)
+          for (var iter=0; iter < StoredSubscriptions.length; iter++) {
+            if (StoredSubscriptions[iter].type === 'folder') {
+              folderNames.push(StoredSubscriptions[iter].name);
             }
           }
         return folderNames;

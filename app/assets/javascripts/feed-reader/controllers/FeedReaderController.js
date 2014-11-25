@@ -18,8 +18,14 @@
       //TODO: Implement the viewing of the individual post in the full screen panel
     });
 
-    function groupPostsByDate(posts) {
 
+    $scope.$on("renderItem", function($event, $item) {
+      if ($item.type === "folder") {
+
+      }
+    });
+
+    function groupPostsByDate(posts) {
 
       function datesInPosts() {
         var dates = _.map(posts, function(item) {
@@ -56,10 +62,9 @@
       $rootScope.$broadcast("renderFeed", allCombined());
     });
 
-    var allCombined = function() {
+    function allCombined() {
       var combined = [];
       var baseData = $scope.data;
-
       for (var iter=0;iter< baseData.length;iter++) {
         var current = baseData[iter];
         if ("folder" === current.type) {
@@ -93,7 +98,24 @@
       //  }
       //];
       return posts;
-    };
+    }
+
+    function getSubscriptionInfo() {
+      var subscriptions = _.map($scope.data, function(item) {
+        if (item.type === "folder") {
+          item.items = _.map(item.items, function(item) {
+            var current = _.clone(item);
+            delete current.items;
+            return current;
+          });
+        } else {
+          item  = _.clone(item);
+          delete item.items;
+        }
+        return item;
+      });
+      return subscriptions;
+    }
 
     $rootScope.getPost = function($id) {
       return {
@@ -112,6 +134,8 @@
     $responsePromise.success(function(data) {
         $rootScope.data = data;
         $rootScope.$broadcast("renderFeed", allCombined());
+        $subscriptionService.setProcessedSubscriptions(getSubscriptionInfo());
+        $rootScope.$broadcast("renderSubscriptions");
     });
 
     //TODO: handle the error condition for when the request fails.

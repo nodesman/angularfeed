@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
   end
 
   def collage
-    render "panels"
+    render :layout => "empty", :partial => "panels"
   end
 
   def item
