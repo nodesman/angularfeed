@@ -24,8 +24,6 @@
 
     $scope.$on("collapseFolder", function($event, $object) {
 
-      console.log("Collapse");
-      console.log($object);
       var $startingIndex = null, $endIndex = null;
 
       var $endState = !$object.collapsed;
