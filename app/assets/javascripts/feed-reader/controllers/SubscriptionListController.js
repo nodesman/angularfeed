@@ -18,6 +18,11 @@
       $scope.subscriptions = $subscriptionsList;
     });
 
+
+    $scope.refresh = function() {
+      $scope.$emit("refresh");
+    }
+
     $scope.collage = function() {
       $scope.$emit("collage");
     };
