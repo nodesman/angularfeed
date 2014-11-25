@@ -6,11 +6,11 @@
     $scope.showDialog = function () {
       $rootScope.$broadcast("showAddNewDialog");
     };
+
     var $subscriptionsList = $subscriptionService.getSubscriptionsSerialList();
     for (var $index in $subscriptionsList) {
       $subscriptionsList[$index].collapsed = false;
     }
-
     $scope.subscriptions = $subscriptionsList;
 
     $scope.collage = function() {
@@ -37,7 +37,6 @@
         $subscriptionsList[$index].collapsed = $endState;
       }
     });
-
   }]);
 
 })();

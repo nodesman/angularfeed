@@ -36,7 +36,7 @@
       <input type="text" ng-show="isNewFolder" name="folder-name" class="right folder-name" placeholder="Folder name..." ng-model="newFolderName" focus-on="folderNameFocus">
       <select name="category" class="category" ng-model="currentFolderSelectionValue">
         <option value="no-folder" selected="selected">No Folder</option>
-        <optgroup label="Select Folder:" >
+        <optgroup label="Select Folder:" ng-show="folderList.length > 0" >
           <option ng-repeat="folder in folderList" value="{{folder}}">{{folder}}</option>
         </optgroup>
         <optgroup label="Create:">

@@ -2,7 +2,9 @@
 
   "use strict";
   var feedReader = angular.module("FeedReader");
-  feedReader.controller("FeedReaderController", ["$scope", "$rootScope", function ($scope, $rootScope) {
+  feedReader.controller("FeedReaderController", ["$scope", "$rootScope", "$subscriptionService", "$http", function ($scope, $rootScope, $subscriptionService, $http) {
+
+    $scope.networkError = false;
 
     $scope.$on("renderItem", function($event, $item) {
         //TODO: Implement render item
@@ -16,34 +18,82 @@
       //TODO: Implement the viewing of the individual post in the full screen panel
     });
 
-    $scope.allCombined = function() {
-      //TODO: Return all the fields combined into a single one.
-      var allFeedsCombined = [
-        {
-          date: 1416653451,
-          items: [
-            {
-              title: "This is a test title",
-              body: "This is the test body",
-              favicon: "http://www.w3.org/2008/site/images/favicon.ico",
-              site: "Site name",
-              time: 1416653451,
-              uuid: 1
-            }
-          ]
-        },
-        {
-          date: 1416353351,
-          items: []
-        }
-      ];
-      return allFeedsCombined;
-    };
+    function groupPostsByDate(posts) {
 
-    $scope.$on("feedListReady", function() {
-      $rootScope.$broadcast("renderFeed", $scope.allCombined());
+
+      function datesInPosts() {
+        var dates = _.map(posts, function(item) {
+          return (new Date(item.date * 1000)).setHours(0, 0, 0, 0) / 1000;
+        });
+        var unique_dates = _.uniq(dates);
+        return unique_dates;
+      }
+
+      var dates = datesInPosts();
+      var groups = [];
+      for (var iter = 0; iter < dates.length; iter++) {
+
+        var current = {
+          date: dates[iter],
+          items: []
+        };
+
+        current.items = _.filter(posts, function(item) {
+          var currentdate = new Date(current.date * 1000);
+          var itemdatewithouthours = new Date(item.date * 1000).setHours(0, 0, 0, 0);
+          return (currentdate.getTime() === itemdatewithouthours)
+        });
+        groups.push(current);
+      }
+
+      groups = _(_.sortBy(groups, function(item) {
+        return item.date;
+      })).reverse().value();
+      return groups;
+    }
+
+    $scope.$on("collage", function() {
+      $rootScope.$broadcast("renderFeed", allCombined());
     });
 
+    var allCombined = function() {
+      var combined = [];
+      var baseData = $scope.data;
+
+      for (var iter=0;iter< baseData.length;iter++) {
+        var current = baseData[iter];
+        if ("folder" === current.type) {
+          for (var j=0 ; j < current.items.length ; j++) {
+            combined = combined.concat(current.items[j].items);
+          }
+        }
+        else {
+          combined = combined.concat(current.items);
+        }
+      }
+
+      var posts = groupPostsByDate(combined);
+      //var allFeedsCombined = [
+      //  {
+      //    date: 1416653451,
+      //    items: [
+      //      {
+      //        title: "This is a test title",
+      //        body: "This is the test body",
+      //        favicon: "http://www.w3.org/2008/site/images/favicon.ico",
+      //        site: "Site name",
+      //        time: 1416653451,
+      //        uuid: 1
+      //      }
+      //    ]
+      //  },
+      //  {
+      //    date: 1416353351,
+      //    items: []
+      //  }
+      //];
+      return posts;
+    };
 
     $rootScope.getPost = function($id) {
       return {
@@ -56,8 +106,21 @@
       }
     };
 
-    //get the feed items and set it on the root scope
+    var subscriptionInfo = $subscriptionService.getSubscriptionsRaw();
+    var $responsePromise = $http.post("/fetch",{ data: subscriptionInfo });
 
+    $responsePromise.success(function(data) {
+        $rootScope.data = data;
+        $rootScope.$broadcast("renderFeed", allCombined());
+    });
+
+    //TODO: handle the error condition for when the request fails.
+
+    $rootScope.$watch(function() {
+      return $rootScope.data;
+    }, function (newValue) {
+      //$subscriptionService.setData(newValue);
+    });
 
   }]);
 })();

@@ -27,6 +27,7 @@
   }
   .feed {
     width: 75%;
+    overflow: auto;
   }
 }
 
@@ -293,6 +294,7 @@
       color: #000;
     }
   }
+
   .content {
     margin: 0 1rem 3rem 1rem;
   }

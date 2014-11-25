@@ -20,6 +20,7 @@
 //= require angular-route
 //= require angular-sanitize.min
 //= require "feed-reader/FeedReader"
+//= require "feed-reader/constants"
 //= require "feed-reader/services/DialogService.js"
 //= require "feed-reader/services/SubscriptionsService.js"
 //= require "feed-reader/directives/SubscriptionItemDirective.js"

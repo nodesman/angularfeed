@@ -4,11 +4,6 @@
   var feedReader = angular.module("FeedReader");
   feedReader.controller("AddDialogController", ["$scope", "$rootScope", "$element", "$subscriptionService", "$dialogService", function ($scope, $rootScope, $element, $subscriptionService, $dialogService) {
 
-    var FOLDER_SELECTION_NONLITERALS = {
-      NEW_FOLDER: "new-folder",
-      NO_FOLDER: "no-folder"
-    };
-
     function setInitialState() {
       $scope.url = null;
       $scope.dialogVisible = false;
@@ -59,8 +54,13 @@
       if ($scope.isNewFolder) {
         $folderName = $scope.newFolderName;
       }
+
+      if ($folderName === FOLDER_SELECTION_NONLITERALS.NO_FOLDER) {
+        $folderName = null;
+      }
       $subscriptionService.subscribe($scope.url, $folderName);
       $scope.close();
+
     };
 
     $scope.close = function () {

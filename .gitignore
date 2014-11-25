@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.idea/angularfeed.iml
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dataSources.xml
