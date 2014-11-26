@@ -1,7 +1,7 @@
 <div class="panel">
   <div class="pane feed-subscriptions" ng-controller="SubscriptionListController">
     <div class="list">
-      <a class="welcome whoami">Hi Raj</a>
+      <a class="welcome whoami"><img src="<%= image_path("angularfeed.png") %>" /></a>
       <div class="subscribed-item">
         <div class="item-content all" ng-click="collage();">Unread</div>
       </div>
@@ -60,7 +60,7 @@
         <div ng-class="{ 'collapsed' : subscription.collapsed === true }" class="folder item-content"><i class="folder-icon expanded"  ng-click="collapse()"></i>{{subscription.name}}</div>
       </div>
       <div ng-if="subscription.type == 'feed'">
-        <div class="feed-item item-content" ng-class="{ 'collapsed': subscription.collapsed === true, 'indented': subscription.child === true}"><img ng-src="{{subscription.favicon}}" />{{subscription.name}}</div>
+        <div class="feed-item item-content" ng-class="{ 'collapsed': subscription.collapsed === true, 'indented': subscription.child === true}">{{subscription.name}}</div>
       </div>
   </div>
 </script>
@@ -72,9 +72,9 @@
   </div>
 </script>
 
+
 <script type="text/html" id="feed-item-template">
   <div class="feed-item" ng-click="showItem()">
-    <div class="icon"><img ng-src="{{item.favicon}}"/></div>
     <div class="item-content">
         <div class="first-row">
           <div class="item-date" data-livestamp="{{item.time}}"></div>

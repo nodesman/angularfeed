@@ -171,7 +171,7 @@
     $subscriptionService.onChange(function() {
       $rootScope.$broadcast("refresh");
     });
-    
+
 
     refreshFeeds();
 
