@@ -7,19 +7,6 @@
     $scope.networkError = false;
 
     $scope.$on("renderItem", function($event, $item) {
-        //TODO: Implement render item
-    });
-
-    $scope.$on("collage", function() {
-      //TODO: Implement consolidated list of feed items
-    });
-
-    $scope.$on("showItem", function($event, $item) {
-      //TODO: Implement the viewing of the individual post in the full screen panel
-    });
-
-
-    $scope.$on("renderItem", function($event, $item) {
       var posts = [];
       if ($item.type === "folder") {
         var relevantFolder = _.find($scope.data, function(item) {
@@ -163,15 +150,17 @@
       return post;
     };
 
-
     $scope.$on("refresh", function () {
+      $scope.$broadcast("showLoading");
       var subscriptionInfo = $subscriptionService.getSubscriptionsRaw();
       var $responsePromise = $http.post("/fetch",{ data: subscriptionInfo });
+
       $responsePromise.success(function(data) {
         $rootScope.data = data;
         $rootScope.$broadcast("renderFeed", getAllGrouped());
         $subscriptionService.setProcessedSubscriptions(getSubscriptionInfo());
         $rootScope.$broadcast("renderSubscriptions");
+        $scope.$broadcast("hideLoading");
       });
     });
 

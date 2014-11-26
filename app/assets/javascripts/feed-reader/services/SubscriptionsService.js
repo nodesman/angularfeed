@@ -8,6 +8,10 @@
 
     function reloadSubscriptions() {
       StoredSubscriptions = JSON.parse($window.localStorage.getItem("angular_feed_data"));
+      if (false == !!StoredSubscriptions || StoredSubscriptions.constructor !== Array) {
+        StoredSubscriptions = [];
+        commitSubscriptions();
+      }
     }
 
     function commitSubscriptions() {
@@ -17,6 +21,9 @@
     reloadSubscriptions();
 
     var subscriptionService = {
+      notifyOnChange: function () {
+
+      },
       isFirstTime: function() {
         return (null === StoredSubscriptions);
       },
@@ -24,10 +31,9 @@
       setProcessedSubscriptions: function(processed) {
         ProcessedSubscriptions = processed;
       },
+
       getSubscriptionsSerialList: function() {
-
         var fullList = [];
-
         _.map(ProcessedSubscriptions, function(item) {
           if (item.type === 'feed') {
             var current = _.clone(item);
@@ -47,11 +53,13 @@
 
         return fullList;
       },
+
       getSubscriptionsRaw: function () {
         return $window.localStorage.getItem("angular_feed_data");
       },
+
       doesSubscriptionExist: function(url) {
-        if (StoredSubscriptions.length > 0)
+        if (null !== StoredSubscriptions && StoredSubscriptions.length > 0)
           for (var iter=0; iter < StoredSubscriptions.length; iter++) {
             if (undefined !== StoredSubscriptions[iter].type && StoredSubscriptions[iter].type === "folder") {
               var currentFeedList = StoredSubscriptions[iter].items;
@@ -69,6 +77,7 @@
           }
         return false;
       },
+
       subscribe: function(url, folderName) {
 
         if (this.doesSubscriptionExist(url)) {
@@ -102,9 +111,10 @@
         commitSubscriptions();
         reloadSubscriptions();
       },
+
       getFolderList: function() {
         var folderNames = [];
-        if (StoredSubscriptions.length > 0)
+        if (null !== StoredSubscriptions && StoredSubscriptions.length > 0)
           for (var iter=0; iter < StoredSubscriptions.length; iter++) {
             if (StoredSubscriptions[iter].type === 'folder') {
               folderNames.push(StoredSubscriptions[iter].name);

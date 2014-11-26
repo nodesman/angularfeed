@@ -23,11 +23,13 @@
 //= require "feed-reader/constants"
 //= require "feed-reader/services/DialogService.js"
 //= require "feed-reader/services/SubscriptionsService.js"
+
 //= require "feed-reader/directives/SubscriptionItemDirective.js"
 //= require "feed-reader/directives/FeedListItemDirective.js"
 //= require "feed-reader/directives/FeedGroupingDirective.js"
 //= require "feed-reader/controllers/FeedReaderController.js"
 //= require "feed-reader/controllers/FeedItemController.js"
+//= require "feed-reader/controllers/LoadingController.js"
 //= require "feed-reader/controllers/SubscriptionListController.js"
 //= require "feed-reader/controllers/AddDialogController.js"
 //= require "feed-reader/controllers/FeedItemsController.js"

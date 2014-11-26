@@ -46,11 +46,14 @@
     </div>
   </div>
 
-  <div class="loading-dialog" controller="LoadingController">
-
+  <div ng-controller="LoadingController" >
+    <div class="lights-down" ng-show="visible"></div>
+    <div class="loading-dialog" ng-show="visible">
+      Loading
+    </div>
   </div>
-</div>
 
+</div>
 <script type="text/html" id="subscribed-item">
   <div class="subscribed-item" ng-click="show()">
       <div ng-if="subscription.type == 'folder'">
@@ -79,7 +82,6 @@
         </div>
         <div class="second-row">
           <h2 class="title">{{item.title}}</h2>
-          <p class="excerpt">{{item.body}}</p>
         </div>
     </div>
   </div>

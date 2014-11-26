@@ -6,8 +6,54 @@ class FeedsController < ApplicationController
   end
 
   def fetch
-    render :layout=>"empty", :partial => "feeds/json"
-    ;
+    @index = 0;
+    subscriptions = JSON.parse(params[:data])
+    final = []
+    result = []
+    for item in subscriptions
+      if (item.is_a?(Hash))
+        sub_list = item['items']
+        new_subscriptions = []
+        for subscription in sub_list do
+          current_subscription_info = process_subscription(subscription)
+          new_subscriptions.push(current_subscription_info)
+        end
+        item['items'] = new_subscriptions
+        current = item.clone
+      else
+        current = process_subscription(item)
+      end
+      result.push(current)
+    end
+    render :text => JSON.dump(result)
+  end
+
+  def process_subscription(item)
+    #make a request for the feed
+
+    feed_data = Feedjira::Feed.fetch_and_parse item
+
+
+    result = {
+        :name => feed_data.title,
+        :url => feed_data.feed_url,
+        :type => "feed",
+        :items => []
+    }
+
+    for entry in feed_data.entries do
+
+      current = {
+          title: entry.title,
+          url: entry.url,
+          body: entry.summary,
+          date: entry.published.to_i,
+          uuid: @index
+      }
+      @index = @index + 1
+      result[:items].push(current)
+    end
+    result
   end
 
   def show
@@ -21,6 +67,5 @@ class FeedsController < ApplicationController
   def item
     render :layout=> "empty", :partial => "viewitem"
   end
-
 
 end

@@ -311,3 +311,33 @@
     }
   }
 }
+
+.lights-down {
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5;
+}
+.loading-dialog {
+  position: fixed;
+  width: 10rem;
+  height: 10rem;
+  text-align: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url(image_path("loader.gif")) no-repeat 50%  40%;
+  background-color: #fff;
+  display: table-cell;
+  padding: 7rem 0 0 0;
+  font-family: inherit;
+  vertical-align: middle;
+  border: 0.1rem solid #eee;
+  box-shadow: 0 0 0.3rem #eee inset;
+  border-radius: 1rem;
+  margin: auto;
+}

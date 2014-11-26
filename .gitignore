@@ -18,3 +18,6 @@
 .idea/dataSources.ids
 .idea/dataSources.local.xml
 .idea/dataSources.xml
+.idea/.generators
+.idea/.rakeTasks
+.idea/runConfigurations/Development__angularfeed.xml
