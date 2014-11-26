@@ -11,18 +11,27 @@ class FeedsController < ApplicationController
     final = []
     result = []
     for item in subscriptions
-      if (item.is_a?(Hash))
-        sub_list = item['items']
-        new_subscriptions = []
-        for subscription in sub_list do
-          current_subscription_info = process_subscription(subscription)
-          new_subscriptions.push(current_subscription_info)
+        if (item.is_a?(Hash))
+          sub_list = item['items']
+          new_subscriptions = []
+          for subscription in sub_list do
+            begin
+              current_subscription_info = process_subscription(subscription)
+            rescue Exception
+              next
+            end
+            new_subscriptions.push(current_subscription_info)
+          end
+          item['items'] = new_subscriptions
+          current = item.clone
+        else
+          begin
+            current = process_subscription(item)
+          rescue Exception
+            next
+          end
         end
-        item['items'] = new_subscriptions
-        current = item.clone
-      else
-        current = process_subscription(item)
-      end
+
       result.push(current)
     end
     render :text => JSON.dump(result)
@@ -32,7 +41,9 @@ class FeedsController < ApplicationController
     #make a request for the feed
 
     feed_data = Feedjira::Feed.fetch_and_parse item
-
+    if (!defined? feed_data.url)
+      raise Exception
+    end
 
     result = {
         :name => feed_data.title,

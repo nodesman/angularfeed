@@ -18,10 +18,13 @@
       $scope.subscriptions = $subscriptionsList;
     });
 
+    $subscriptionService.onChange(function() {
+        $rootScope.$broadcast("refresh");
+    });
 
     $scope.refresh = function() {
       $scope.$emit("refresh");
-    }
+    };
 
     $scope.collage = function() {
       $scope.$emit("collage");

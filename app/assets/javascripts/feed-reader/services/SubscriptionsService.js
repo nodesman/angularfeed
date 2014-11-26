@@ -6,6 +6,8 @@
     var StoredSubscriptions = [];
     var ProcessedSubscriptions = [];
 
+    var onChangeCallbacks = [];
+
     function reloadSubscriptions() {
       StoredSubscriptions = JSON.parse($window.localStorage.getItem("angular_feed_data"));
       if (false == !!StoredSubscriptions || StoredSubscriptions.constructor !== Array) {
@@ -20,10 +22,18 @@
 
     reloadSubscriptions();
 
-    var subscriptionService = {
-      notifyOnChange: function () {
+    function notifyChange() {
+      for (var iter in onChangeCallbacks) {
+        onChangeCallbacks[iter]();
+      }
+    }
 
+
+    var subscriptionService = {
+      onChange: function(callback) {
+        onChangeCallbacks.push(callback);
       },
+
       isFirstTime: function() {
         return (null === StoredSubscriptions);
       },
@@ -110,6 +120,7 @@
 
         commitSubscriptions();
         reloadSubscriptions();
+        notifyChange();
       },
 
       getFolderList: function() {

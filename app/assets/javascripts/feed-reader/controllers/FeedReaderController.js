@@ -6,6 +6,9 @@
 
     $scope.networkError = false;
 
+    if (undefined === $rootScope.firstTime)
+      $rootScope.firstTime = false;
+
     $scope.$on("renderItem", function($event, $item) {
       var posts = [];
       if ($item.type === "folder") {
@@ -150,29 +153,27 @@
       return post;
     };
 
-    $scope.$on("refresh", function () {
+    var refreshFeeds = function () {
       $scope.$broadcast("showLoading");
       var subscriptionInfo = $subscriptionService.getSubscriptionsRaw();
-      var $responsePromise = $http.post("/fetch",{ data: subscriptionInfo });
+      var $responsePromise = $http.post("/fetch", {data: subscriptionInfo});
 
-      $responsePromise.success(function(data) {
+      $responsePromise.success(function (data) {
         $rootScope.data = data;
         $rootScope.$broadcast("renderFeed", getAllGrouped());
         $subscriptionService.setProcessedSubscriptions(getSubscriptionInfo());
         $rootScope.$broadcast("renderSubscriptions");
         $scope.$broadcast("hideLoading");
       });
+    };
+    $scope.$on("refresh", refreshFeeds);
+
+    $subscriptionService.onChange(function() {
+      $rootScope.$broadcast("refresh");
     });
+    
 
-    //TODO: handle the error condition for when the request fails.
-
-    $rootScope.$watch(function() {
-      return $rootScope.data;
-    }, function (newValue) {
-      //$subscriptionService.setData(newValue);
-    });
-
-    $rootScope.$broadcast("refresh");
+    refreshFeeds();
 
   }]);
 })();
