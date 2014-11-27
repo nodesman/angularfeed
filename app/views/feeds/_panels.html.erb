@@ -57,10 +57,12 @@
 <script type="text/html" id="subscribed-item">
   <div class="subscribed-item" ng-click="show()">
       <div ng-if="subscription.type == 'folder'">
+
         <div ng-class="{ 'collapsed' : subscription.collapsed === true }" class="folder item-content"><i class="folder-icon expanded"  ng-click="collapse()"></i>{{subscription.name}}</div>
       </div>
       <div ng-if="subscription.type == 'feed'">
-        <div class="feed-item item-content" ng-class="{ 'collapsed': subscription.collapsed === true, 'indented': subscription.child === true}">{{subscription.name}}</div>
+
+        <div class="feed-item item-content" ng-class="{ 'collapsed': subscription.collapsed === true, 'indented': subscription.child === true}"><div class="count">{{subscription.count}}</div>{{subscription.name}}</div>
       </div>
   </div>
 </script>

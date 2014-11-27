@@ -130,12 +130,14 @@
           currentitem = _.clone(item, true);
           currentitem.items = _.map(item.items, function(item) {
             var current = _.clone(item, true);
+            current.count = current.items.length;
             delete current.items;
             return current;
           });
           return currentitem;
         } else {
           currentitem  = _.clone(item, true);
+          currentitem.count = currentitem.items.length;
           delete currentitem.items;
           return currentitem;
         }
