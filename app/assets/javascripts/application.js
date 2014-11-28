@@ -28,6 +28,7 @@
 //= require "feed-reader/directives/FeedListItemDirective.js"
 //= require "feed-reader/directives/FeedGroupingDirective.js"
 //= require "feed-reader/controllers/FeedReaderController.js"
+//= require "feed-reader/controllers/FirstTimeController.js"
 //= require "feed-reader/controllers/FeedItemController.js"
 //= require "feed-reader/controllers/LoadingController.js"
 //= require "feed-reader/controllers/SubscriptionListController.js"
