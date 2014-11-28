@@ -47,21 +47,21 @@
   </div>
 
   <div ng-controller="LoadingController" >
-    <div class="lights-down" ng-show="visible"></div>
-    <div class="loading-dialog" ng-show="visible">
+    <div class="lights-down" ng-show="loadingVisible"></div>
+    <div class="loading-dialog" ng-show="loadingVisible">
       Loading
     </div>
   </div>
-  <div class="controller">
+  <div class="controller" ng-controller="FirstTimeController" ng-show="firstTimeVisible">
       <div class="lights-down"></div>
       <div class="first-time-dialog">
         <h2>AngularFeed</h2>
         <p>Hi There! Welcome to AngularFeed.</p>
         <p>Your favorite minimalistic feed reader.</p>
         <br/>
-        <p>Click on <span class="add-icon"></span> to subscribe to a new feed now.</p>
+        <p>Click on <span class="add-subscription-icon"></span> to subscribe to a new feed now.</p>
         <br/>
-        <input type="button" value="LET'S GET STARTED NOW" />
+        <input type="button" ng-click="close()" value="LET'S GET STARTED NOW" />
       </div>
   </div>
 

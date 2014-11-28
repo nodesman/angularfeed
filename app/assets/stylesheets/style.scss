@@ -10,10 +10,16 @@
 @import "framework-elements";
 @import "components/dialog";
 
+$subscriptionItemColor: #ffffd7;
+$subscriptionPanelBackgroundColor: #595959;
+$subscriptionItemHoverColor: #6a6969;
 .app,.content {
   height: 100%;
 }
-
+.logo {
+  width: 20rem;
+  margin: 0 auto;
+}
 .panel {
   height: 100%;
   min-width: 128rem;
@@ -61,9 +67,15 @@
 .feed-subscriptions {
   padding: 2rem 0 0 0;
   position: relative;
+  background-color: $subscriptionPanelBackgroundColor;
 
   .all {
     font-size: 1.8rem;
+    color: $subscriptionItemColor;
+    &:hover {
+      background-color: $subscriptionItemHoverColor;
+    }
+
   }
 
   .welcome {
@@ -75,13 +87,11 @@
   .count {
     float: right;
     width: 3rem;
+    color: #777;
     text-align: center;
     color: #DDD;
     font-size: 1.3rem;
   }
-
-
-
 
   .list {
     position: absolute;
@@ -157,6 +167,7 @@
   display: block;
   height: 100px;
   margin: 0 auto;
+  color: $subscriptionItemColor;
   text-align: center;
 }
 
@@ -164,7 +175,7 @@
   display: block;
   font-size: 1.8rem;
   &:hover {
-    background-color: #eee;
+    background-color: $subscriptionItemHoverColor;
   }
 
 
@@ -197,6 +208,7 @@
 
   .feed-item {
 
+    color: $subscriptionItemColor;
 
     &.indented {
       padding-left: 5rem;
@@ -237,11 +249,26 @@
   margin-bottom: 2rem;
   border: 0.1rem solid #eee;
   .section-date {
-    background: linear-gradient(rgba(255, 255, 255, 1.0) 10px, rgba(230, 230, 230, 1.0) 21px);
+    background: linear-gradient(white 0px, #efefef 21px);
     border-bottom: 0.1rem solid #eee;
     padding: 0.3rem;
     cursor: default;
   }
+
+  .feed-item {
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}
+
+.feed {
+  .pane {
+    &:hover {
+      background-color: #eee;
+    }
+  }
+
 }
 
 .feed-item {
@@ -260,10 +287,7 @@
     font-size: 1.2rem;
   }
 
-  &:hover {
-    background-color: #999;
-    color: #fff;
-  }
+
 
   h2 {
     white-space: nowrap;
@@ -355,7 +379,7 @@
   text-align: center;
   position: fixed;
   margin: auto;
-  width: 30rem;
+  width: 32rem;
   height: 20rem;
   top: 0;
   left: 0;
@@ -377,5 +401,13 @@
     cursor: pointer;
     padding: 0.5rem 1rem;
     border-radius: 0.3rem;
+  }
+
+  .add-subscription-icon {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+    background-size: contain;
   }
 }

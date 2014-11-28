@@ -2,6 +2,11 @@
   "use strict";
 
   var feedReader = angular.module("FeedReader");
+
+  function isInvalid(arg) {
+    return false == !!arg || arg.constructor !== Array || arg.length === 0;
+  }
+
   feedReader.factory("$subscriptionService", ["$window", function($window) {
     var StoredSubscriptions = [];
     var ProcessedSubscriptions = [];
@@ -10,7 +15,7 @@
 
     function reloadSubscriptions() {
       StoredSubscriptions = JSON.parse($window.localStorage.getItem("angular_feed_data"));
-      if (false == !!StoredSubscriptions || StoredSubscriptions.constructor !== Array) {
+      if (isInvalid(StoredSubscriptions)) {
         StoredSubscriptions = [];
         commitSubscriptions();
       }
@@ -35,7 +40,7 @@
       },
 
       isFirstTime: function() {
-        return (null === StoredSubscriptions);
+        return (isInvalid(StoredSubscriptions));
       },
 
       setProcessedSubscriptions: function(processed) {
