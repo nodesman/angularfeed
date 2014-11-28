@@ -10,7 +10,6 @@
 
     function renderFeed($data) {
       $scope.assortedFeedItems = $data;
-      $rootScope.$broadcast("hideLoading");
     }
 
     $scope.$watch(function() {

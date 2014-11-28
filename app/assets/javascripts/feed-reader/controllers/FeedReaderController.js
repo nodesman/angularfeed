@@ -5,6 +5,8 @@
   feedReader.controller("FeedReaderController", ["$scope", "$rootScope", "$subscriptionService", "$http", function ($scope, $rootScope, $subscriptionService, $http) {
 
     $scope.networkError = false;
+    $scope.firstTimeVisible = false;
+    $scope.loadingVisible = false;
 
     if (undefined === $rootScope.firstTime)
       $rootScope.firstTime = false;
@@ -77,7 +79,7 @@
     }
 
     $scope.$on("collage", function() {
-      $rootScope.$broadcast("renderFeed", getAllGrouped());
+      $rootScope.$broadcast("renderFeed", $scope.getAllGrouped());
     });
 
     function getAllPostsAvailable() {
@@ -142,13 +144,15 @@
     }
 
     var refreshFeeds = function () {
-      $scope.$broadcast("showLoading");
+      $scope.loadingVisible = true;
       var subscriptionInfo = $subscriptionService.getSubscriptionsRaw();
       var $responsePromise = $http.post("/fetch", {data: subscriptionInfo});
 
       $responsePromise.success(function (data) {
         $rootScope.data = data;
         renderFeedData();
+        console.log("Hiding loading dialog");
+        $scope.loadingVisible = false;
       });
     };
     $scope.$on("refresh", refreshFeeds);
@@ -157,8 +161,14 @@
       $rootScope.$broadcast("refresh");
     });
 
-    if ($rootScope.data === undefined)
-      refreshFeeds();
+    if ($subscriptionService.isFirstTime()) {
+      $scope.firstTimeVisible = true;
+    } else {
+      if ($rootScope.data === undefined)
+        refreshFeeds();
+    }
+
+
 
   }]);
 })();
