@@ -3,6 +3,7 @@
     <div class="list">
       <a class="welcome whoami"><img src="<%= image_path("angularfeed.png") %>" /></a>
       <div class="subscribed-item">
+      <a class="welcome whoami"><img src="<%= image_path("logo.png") %>" class="logo" /></a>
         <div class="item-content all" ng-click="collage();">All Feeds</div>
       </div>
       <ul>
@@ -51,6 +52,18 @@
     <div class="loading-dialog" ng-show="visible">
       Loading
     </div>
+  </div>
+  <div class="controller">
+      <div class="lights-down"></div>
+      <div class="first-time-dialog">
+        <h2>AngularFeed</h2>
+        <p>Hi There! Welcome to AngularFeed.</p>
+        <p>Your favorite minimalistic feed reader.</p>
+        <br/>
+        <p>Click on <span class="add-icon"></span> to subscribe to a new feed now.</p>
+        <br/>
+        <input type="button" value="LET'S GET STARTED NOW" />
+      </div>
   </div>
 
 </div>

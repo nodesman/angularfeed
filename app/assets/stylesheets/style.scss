@@ -348,3 +348,34 @@
   border-radius: 1rem;
   margin: auto;
 }
+
+.first-time-dialog {
+  background-color: #eee;
+  border-radius: 1rem;
+  text-align: center;
+  position: fixed;
+  margin: auto;
+  width: 30rem;
+  height: 20rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.5rem;
+    margin: 0.3rem;
+  }
+
+  input {
+    background-color: #000;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+  }
+}
