@@ -41,14 +41,24 @@ class FeedsController < ApplicationController
     #make a request for the feed
 
     feed_data = Feedjira::Feed.fetch_and_parse item
+
     if (!defined? feed_data.url)
       raise Exception
+    end
+
+    favicon_url = ""
+    favicon = WWW::Favicon.new
+    begin
+      favicon_url = favicon.find(feed_data.url)
+    rescue Exception
+      puts "Failed fetching favicon for " + feed_data.url
     end
 
     result = {
         :name => feed_data.title,
         :url => feed_data.feed_url,
         :type => "feed",
+        :favicon => favicon_url,
         :items => []
     }
 
@@ -59,6 +69,7 @@ class FeedsController < ApplicationController
           url: entry.url,
           body: entry.summary,
           date: entry.published.to_i,
+          :favicon => favicon_url,
           uuid: @index
       }
       @index = @index + 1

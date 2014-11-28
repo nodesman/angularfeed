@@ -8,15 +8,22 @@
     };
 
     var $subscriptionsList = [];
+    $rootScope.$watch(function () {
+      return $rootScope.data;
+    }, function() {
+      renderSubscriptions();
+    });
 
-    $scope.$on("renderSubscriptions", function() {
+    var renderSubscriptions = function() {
       $subscriptionsList = $subscriptionService.getSubscriptionsSerialList();
       $subscriptionsList = _.map($subscriptionsList, function(item) {
         item.collapsed = false;
         return item;
       });
       $scope.subscriptions = $subscriptionsList;
-    });
+    };
+
+    $scope.$on("renderSubscriptions", renderSubscriptions);
 
     $subscriptionService.onChange(function() {
         $rootScope.$broadcast("refresh");
@@ -32,9 +39,7 @@
 
     $scope.$on("collapseFolder", function($event, $object) {
 
-      var $startingIndex = null, $endIndex = null;
-
-      var $endState = !$object.collapsed;
+      var $startingIndex = null, $endIndex = null, $endState = !$object.collapsed;
 
       for (var $index =0; $index < $subscriptionsList.length; $index++) {
 

@@ -3,7 +3,7 @@
     <div class="list">
       <a class="welcome whoami"><img src="<%= image_path("angularfeed.png") %>" /></a>
       <div class="subscribed-item">
-        <div class="item-content all" ng-click="collage();">Unread</div>
+        <div class="item-content all" ng-click="collage();">All Feeds</div>
       </div>
       <ul>
         <subscription-item ng-repeat="subscription in subscriptions" />
@@ -62,7 +62,7 @@
       </div>
       <div ng-if="subscription.type == 'feed'">
 
-        <div class="feed-item item-content" ng-class="{ 'collapsed': subscription.collapsed === true, 'indented': subscription.child === true}"><div class="count">{{subscription.count}}</div>{{subscription.name}}</div>
+        <div class="feed-item item-content" ng-class="{ 'collapsed': subscription.collapsed === true, 'indented': subscription.child === true}"><img ng-src="{{subscription.favicon}}" /><div class="count">{{subscription.count}}</div>{{subscription.name}}</div>
       </div>
   </div>
 </script>
@@ -77,6 +77,7 @@
 
 <script type="text/html" id="feed-item-template">
   <div class="feed-item" ng-click="showItem()">
+    <img ng-src="{{item.favicon}}" class="icon">
     <div class="item-content">
         <div class="first-row">
           <div class="item-date" data-livestamp="{{item.time}}"></div>

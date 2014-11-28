@@ -97,31 +97,11 @@
       return combined;
     }
 
-    function getAllGrouped() {
-
+    $scope.getAllGrouped = function () {
       var combined = getAllPostsAvailable();
       var posts = groupPostsByDate(combined);
-      //var allFeedsCombined = [
-      //  {
-      //    date: 1416653451,
-      //    items: [
-      //      {
-      //        title: "This is a test title",
-      //        body: "This is the test body",
-      //        favicon: "http://www.w3.org/2008/site/images/favicon.ico",
-      //        site: "Site name",
-      //        time: 1416653451,
-      //        uuid: 1
-      //      }
-      //    ]
-      //  },
-      //  {
-      //    date: 1416353351,
-      //    items: []
-      //  }
-      //];
       return posts;
-    }
+    };
 
     function getSubscriptionInfo() {
       var subscriptions = _.map($scope.data, function(item) {
@@ -155,6 +135,12 @@
       return post;
     };
 
+    function renderFeedData() {
+      $rootScope.$broadcast("renderFeed", $scope.getAllGrouped());
+      $subscriptionService.setProcessedSubscriptions(getSubscriptionInfo());
+      $rootScope.$broadcast("renderSubscriptions");
+    }
+
     var refreshFeeds = function () {
       $scope.$broadcast("showLoading");
       var subscriptionInfo = $subscriptionService.getSubscriptionsRaw();
@@ -162,10 +148,7 @@
 
       $responsePromise.success(function (data) {
         $rootScope.data = data;
-        $rootScope.$broadcast("renderFeed", getAllGrouped());
-        $subscriptionService.setProcessedSubscriptions(getSubscriptionInfo());
-        $rootScope.$broadcast("renderSubscriptions");
-        $scope.$broadcast("hideLoading");
+        renderFeedData();
       });
     };
     $scope.$on("refresh", refreshFeeds);
@@ -174,8 +157,8 @@
       $rootScope.$broadcast("refresh");
     });
 
-
-    refreshFeeds();
+    if ($rootScope.data === undefined)
+      refreshFeeds();
 
   }]);
 })();
