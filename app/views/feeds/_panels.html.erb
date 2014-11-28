@@ -1,9 +1,8 @@
 <div class="panel">
   <div class="pane feed-subscriptions" ng-controller="SubscriptionListController">
     <div class="list">
-      <a class="welcome whoami"><img src="<%= image_path("angularfeed.png") %>" /></a>
-      <div class="subscribed-item">
       <a class="welcome whoami"><img src="<%= image_path("logo.png") %>" class="logo" /></a>
+      <div class="subscribed-item" ng-show="subscriptions.length > 0">
         <div class="item-content all" ng-click="collage();">All Feeds</div>
       </div>
       <ul>
