@@ -189,11 +189,13 @@ $subscriptionItemHoverColor: #6a6969;
   }
 
   .folder {
+    color: $subscriptionItemColor;
     .folder-icon {
       background: url(image_path("feed-item-open.png")) no-repeat;
       background-size: contain;
       width: 20px;
       height: 20px;
+
       margin-right: 1rem;
       display: inline-block;
       vertical-align: middle;
