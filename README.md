@@ -1,6 +1,7 @@
-# Rails Anuglar Feed
+# AnuglarFeed
 ================
 
-My implementation of a feed reader using AngularJs. It uses local storage to store your subscriptions. Subscribe to an almost unlimited number of feeds. organize them under folders and read your feeds in a segmented fashion. 
+![Angular Feed](https://raw.githubusercontent.com/nodesman/angularfeed/master/ux/angularfeed.png)
 
-This will evolve to have a user account system so that you can carry your subscriptions around. 
+My implementation of a feed reader using AngularJs. It uses local storage to store your subscriptions. Subscribe to an almost unlimited number of feeds. Organize them under folders and read your feeds in a segmented fashion. 
+
