@@ -23,7 +23,6 @@
 //= require "feed-reader/constants"
 //= require "feed-reader/services/DialogService.js"
 //= require "feed-reader/services/SubscriptionsService.js"
-
 //= require "feed-reader/directives/SubscriptionItemDirective.js"
 //= require "feed-reader/directives/FeedListItemDirective.js"
 //= require "feed-reader/directives/FeedGroupingDirective.js"
