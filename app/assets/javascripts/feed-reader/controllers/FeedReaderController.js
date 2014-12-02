@@ -67,7 +67,7 @@
         current.items = _.filter(posts, function(item) {
           var currentdate = new Date(current.date * 1000);
           var itemdatewithouthours = new Date(item.date * 1000).setHours(0, 0, 0, 0);
-          return (currentdate.getTime() === itemdatewithouthours)
+          return (currentdate.getTime() === itemdatewithouthours);
         });
         groups.push(current);
       }
@@ -132,7 +132,7 @@
       $id = parseInt($id);
       var posts = getAllPostsAvailable();
       var post = _.find(posts, function(item) {
-        return item.uuid === $id
+        return item.uuid === $id;
       });
       return post;
     };

@@ -22,7 +22,7 @@
     });
 
     $scope.$watch(function () {
-      return $scope.newFolderName
+      return $scope.newFolderName;
     }, function (newValue) {
       $scope.isValidFolderName = (0 < newValue.length);
     });
@@ -30,7 +30,7 @@
     $scope.$watch(function() {
       return $scope.url;
     }, function(newValue) {
-      $scope.isValidUrl = (false !== !!newValue && newValue.length > 0)
+      $scope.isValidUrl = (false !== !!newValue && newValue.length > 0);
     });
 
     $scope.$watch(function() {

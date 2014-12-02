@@ -4,7 +4,7 @@
   var feedReader = angular.module("FeedReader");
 
   function isInvalid(arg) {
-    return false == !!arg || arg.constructor !== Array || arg.length === 0;
+    return false !== !!arg && arg.constructor === Array && arg.length !== 0;
   }
 
   feedReader.factory("$subscriptionService", ["$window", function($window) {
@@ -53,13 +53,13 @@
           if (item.type === 'feed') {
             var current = _.clone(item);
             current.child = false;
-            fullList.push(current)
+            fullList.push(current);
           } else {
             var folder = _.clone(item);
             delete folder.items;
             fullList.push(folder);
             _.map(item.items, function(item) {
-              var current = _.clone(item)
+              var current = _.clone(item);
               current.child = true;
               fullList.push(current);
             });

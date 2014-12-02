@@ -5,7 +5,11 @@
       scope.$watch(function() {
         return scope[attr.focusOn] === true;
       }, function(newValue) {
-        (true === newValue) ? elem[0].focus() : elem[0].blur();
+         if (true === newValue)  {
+           elem[0].focus();
+         } else {
+           elem[0].blur();
+         }
       });
     };
   });

@@ -8,6 +8,6 @@
 
     $scope.close = function() {
       $scope.firstTimeVisible = false;
-    }
+    };
   }]);
 })();

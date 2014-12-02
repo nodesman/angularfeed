@@ -11,7 +11,7 @@
         };
 
         $scope.show = function() {
-          $scope.$emit("renderItem", $scope.subscription)
+          $scope.$emit("renderItem", $scope.subscription);
         };
       }
     };

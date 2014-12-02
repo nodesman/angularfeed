@@ -13,10 +13,11 @@
     }
 
     $scope.$watch(function() {
-      return $scope.data
+      return $scope.data;
     }, function ($newValue) {
-      if ($newValue !== undefined)
+      if ($newValue !== undefined) {
         renderFeed($scope.getAllGrouped());
+      }
     });
 
     $scope.$on("showItem", function($event, $data) {
