@@ -4,7 +4,7 @@
   var feedReader = angular.module("FeedReader");
 
   function isInvalid(arg) {
-    return false !== !!arg && arg.constructor === Array && arg.length !== 0;
+    return false === !!arg || (Array.isArray(arg) && arg.length === 0);
   }
 
   feedReader.factory("$subscriptionService", ["$window", function($window) {
